@@ -21,10 +21,10 @@ public:
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(maze[i][j]=='S'){
-                    sr=n,sc=m;
+                    sr=i,sc=j;
                 }
                 if(maze[i][j]=='E'){
-                    er=n,ec=m;
+                    er=i,ec=j;
                 }
                 vis[i][j]=0;
             }
@@ -40,12 +40,13 @@ public:
                 int nr=tr+dx[i];
                 int nc=tc+dy[i];
                 //if(nr==er&&nc==ec)
-                if(maze[nr][nc]=='E')
+                if(nr>=0&&nc>=0&&nr<n&&nc<m&&maze[nr][nc]=='E')
                 {
                     return now.step+1;
                 }
                 if(nr>=0&&nc>=0&&nr<n&&nc<m&&vis[nr][nc]==0&&maze[nr][nc]=='*'){
                     qq.push(Node(nr,nc,now.step+1));
+                    vis[nr][nc]=1;
                 }
             }
         }//
